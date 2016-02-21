@@ -6,15 +6,42 @@ BOTTLESHOP = 'http://www.bellwoodsbrewery.com/product-category/bottleshop/'
 
 PICKLE_FILE = 'beers.pickle'
 
+class Beer(object):
+
+	def __init__(self, title, link):
+		self.title = title
+		self.link = link
+		self.available = True
+
+	def toggle_availability():
+		self.available = not self.available
+
 def process(BEERS, available):
 	''' '''
+	
+	previously_available =  [b.title for b in BEERS.values() if b.available]
 	for beer in available:
 		title = beer['title']
 		link = beer['link']
 		if title not in BEERS:
 			print 'new beer alert: ' + title
-			BEERS[title] = link
-		save_beer_list(BEERS)
+			new_beer = Beer(title, link)
+			BEERS[title] = new_beer
+		else:
+			# is it newly available
+			if title not in previously_available:
+				print 'newly available!'
+				BEERS[beer].toggle_availability()
+			else:
+				print 'still going'
+			# is it extinct
+	
+	currently_available = [b['title'] for b in available]
+	for beer in previously_available:
+		if beer not in currently_available:
+			print 'extinct'
+			BEERS[beer].toggle_availability()
+	save_beer_list(BEERS)
 
 def get_current_beers():
     '''Pings the website and returns a list of [name, link] for each currently available beer'''
