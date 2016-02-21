@@ -6,6 +6,11 @@ BOTTLESHOP = 'http://www.bellwoodsbrewery.com/product-category/bottleshop/'
 
 PICKLE_FILE = 'beers.pickle'
 
+SOLD_OUT = 0
+RESTOCK = 1
+INSTOCK = 2
+NEW = 3
+
 class Beer(object):
 
 	def __init__(self, title, link):
@@ -16,7 +21,19 @@ class Beer(object):
 	def toggle_availability():
 		self.available = not self.available
 
-def process(BEERS, available):
+def log(state, beer):
+	if state == SOLD_OUT:
+		print 'sold out: ' + beer.title
+	elif state == RESTOCK:
+		print 'restock: ' + beer.title
+	elif state == INSTOCK:
+		print 'still going: ' + beer.title
+	elif state == NEW:
+		print 'new: ' + beer.title
+	else:
+		print 'invalid state'
+
+def process_current_availability(BEERS, available):
 	''' '''
 	
 	previously_available =  [b.title for b in BEERS.values() if b.available]
@@ -24,23 +41,22 @@ def process(BEERS, available):
 		title = beer['title']
 		link = beer['link']
 		if title not in BEERS:
-			print 'new beer alert: ' + title
 			new_beer = Beer(title, link)
+			log(NEW, new_beer)
 			BEERS[title] = new_beer
 		else:
 			# is it newly available
 			if title not in previously_available:
-				print 'newly available!'
 				BEERS[beer].toggle_availability()
+				log(RESTOCK, BEERS[title])
 			else:
-				print 'still going'
-			# is it extinct
+				log(INSTOCK, BEERS[title])
 	
 	currently_available = [b['title'] for b in available]
-	for beer in previously_available:
-		if beer not in currently_available:
-			print 'extinct'
-			BEERS[beer].toggle_availability()
+	for title in previously_available:
+		if title not in currently_available:
+			BEERS[title].toggle_availability()
+			log(SOLD_OUT, BEERS[title])
 	save_beer_list(BEERS)
 
 def get_current_beers():
@@ -87,7 +103,7 @@ def proc():
 	# get the beers
 	available = get_current_beers()
 	# process the beers
-	process(BEERS, available)
+	process_current_availability(BEERS, available)
 
 	return
 
