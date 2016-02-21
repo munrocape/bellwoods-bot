@@ -35,8 +35,6 @@ def log(state, beer):
 		print 'still going: ' + beer.title
 	elif state == NEW:
 		print 'new: ' + beer.title
-	else:
-		print 'invalid state'
 
 def process_current_availability(BEERS, available):
 	''' '''
@@ -52,7 +50,7 @@ def process_current_availability(BEERS, available):
 		else:
 			# is it newly available
 			if title not in previously_available:
-				BEERS[beer].toggle_availability()
+				BEERS[title].toggle_availability()
 				log(RESTOCK, BEERS[title])
 			else:
 				log(INSTOCK, BEERS[title])
@@ -103,13 +101,12 @@ def save_beer_list(BEERS):
 def proc():
 	''' '''
 
+	# get the trackrecord
 	BEERS = get_beer_list()
-
-	# get the beers
+	# get the current beers
 	available = get_current_beers()
-	# process the beers
+	# update the track record
 	process_current_availability(BEERS, available)
-
 	return
 
 if __name__ == '__main__':
