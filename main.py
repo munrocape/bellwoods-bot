@@ -1,6 +1,7 @@
 import bs4
 import cPickle as pickle
 import requests
+import datetime
 
 BOTTLESHOP = 'http://www.bellwoodsbrewery.com/product-category/bottleshop/'
 
@@ -16,9 +17,13 @@ class Beer(object):
 	def __init__(self, title, link):
 		self.title = title
 		self.link = link
-		self.available = True
+		self.available = False
+		self.history = []
+		self.toggle_availability()
 
 	def toggle_availability():
+		t = datetime.datetime.now()
+		self.history.append(t)
 		self.available = not self.available
 
 def log(state, beer):
