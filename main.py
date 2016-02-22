@@ -21,7 +21,7 @@ class Beer(object):
 		self.history = []
 		self.toggle_availability()
 
-	def toggle_availability():
+	def toggle_availability(self):
 		t = datetime.datetime.now()
 		self.history.append(t)
 		self.available = not self.available
