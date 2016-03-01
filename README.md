@@ -1,8 +1,13 @@
-# Bellwoods Bot
+# Toronto Bottleshops
 
-This is a simple service that acomplishes two things:
+This is a scraper and website to list up-to-date bottleshop listings for breweries around Toronto.
 
-1. Check what beers are currently available
-2. Alert on changes to the list - new additions and those that have gone the way of Yeezy 350s (sold out)
+Currently, it supports:
 
-In the interests of combating scope creep, I hope this list does not grow.
+- [x] Bellwoods
+- [ ] Burdock
+- [ ] Rainhard
+- [ ] Bloodbrothers
+- [ ] Leftfield
+
+Feel free to add to this list or make a PR.

@@ -1,0 +1,87 @@
+<!-- 
+                ~  ~
+              ( o )o)
+             ( o )o )o)
+           (o( ~~~~~~~~o
+           ( )' ~~~~~~~'
+           ( )|)       |-.
+             o| _ _ _  |-. \
+             o|  | | | |  \ \
+              |  | |_| |   | |
+             o|        |  / /
+              |        |." "
+              |        |- '
+              .========.
+ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Bottleshops</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel='stylesheet' href='css/bottleshop.css'>
+
+  <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src='js/bottleshopController.js'></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- http://www.favicon.cc/?action=icon&file_id=780885 -->
+  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQFDZAEFQ2QAvNM4AQVPZAHiF1AAAaDoAMj7IAFl45AClvfMAi6nuADc+0QA2QtQAtbbwAE5n3wBjgucAgZzsAFNt3wCctvEAR1baAKe58QAtKqAANEDPAFp75QBwmOoAKCTEAHB1ygB1m+oAj7LvAE5k4AC2xvQAt8b0ALvD9ACqqOwAZnS2AL/G9ABBfV4ASWLbAI6v8ACzvPIAYYHmAH2V6wCNjtYAT2beAGOE5gCUtfAAQFLZAEFrVgCitfAAVnfkACUgwwAYDKMAcpfpAHSX6QAZEaAAS1/cAKzC8wCvv/MAeJ7sAEGMaAAAXCMAT2nfAABdJgA/TtcAm7XxAJ648QBCU90Aa5HqADI5zwB+ktIAjK7vADdB1QCdn+YAS2PgAGCA5QB4neoAtsX0AFBu3QAFJBYAAF0wAGiH6ACFp+0AIiOzAFdz4wCMoe0AnJzeACYjxQCLrvAAKibFAJGx8ABNZd4ALCnFAFJm2ABtftcAPU7QAJ2x8AAtNsgAAGAxAEBR2QCEpO4AwMj1AG2Q6QAzPNEAJCHAAEZb3ABzmekAqsHzAABPLABOaNYAPErXAHyd7ABTa98AZonnAGSN6gCjrvEAQlTaAKW38QAzPNIAFwqhAK238QCut/EAdJnqAF5/5QCyuvEAaXjZAKCh5gApM7gAHRSkAE5l4AAqL8cAAFYwAH6g7QC4x/QALzfEAFdr4AC/x/QAMTjQADI70ABZeOMAJCS5ALCw7wCxsO8AOkbWAGKC5gA+SdYAuMDyAC0zwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AAAAAAAAAAAAAAAAADYzf3YVAAAAAAAAAAAAUhlbVlhnMosAAAAAAAAAhYhmC3WJkkQDgQAAAAAAB21iAmIEAT+OkEdgAAAAXnM3ET1vWg4raGguDH4AAF4dCA8oSnqPijFTSUIWAAAlLGlLG3k1NGUxcBeAEwAATRhXHCZGLVk6cRhDUIYAAGxuQUASCWo4Y4NRChBcAAApKRQfOUyEHkVfdDBUBQAAAF1yIGQjhyd3e5F4fAAAAAAAIn2NDVUqIYxIGgAAAAAAa4JPPjxOBiRhBjsAAAAALy8GBgAATgAGBgYAAAAAAAAAAAAAAAAAAAAAAAAAAP9/AAD8HwAA8A8AAOAHAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAHAADABwAAho8AAP//AAA=" rel="icon" type="image/x-icon" />
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class='container' ng-app='bottleshopApp' ng-controller='BottleshopController'>
+    <div class="row">
+      <div class='' style="margin-top: 10%">
+        <h2>TO Bottleshops</h2>
+          <p>This is an (incomplete) overview of bottleshop listings for Toronto Breweries that have online pages. Results are at most 20 minutes old.</p>
+        <div ng-show='cookingUp'>
+          <p>Fetching the list - coming in hot off the presses ...</p>
+        </div>
+        <div ng-hide='cookingUp'>
+          <h4>Recently Stocked</h4>
+            <div ng-repeat='brewery in listings'>
+              <span ng-repeat='beer in brewery.beers'>
+                <p ng-show='beer.recently_added'>{{brewery.brewery}} // {{beer.name}}</p>
+              </span>
+            </div>
+          <h4>All listings</h4>
+            <div ng-repeat='brewery in listings'>
+              <span ng-repeat='beer in brewery.beers'>
+                <p>{{brewery.brewery}} // {{beer.name}} <span ng-show='beer.recently_added'>(Recent)</span></p>
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

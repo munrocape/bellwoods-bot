@@ -1,113 +1,62 @@
-import bs4
-import cPickle as pickle
-import requests
+from bottle import route, run, static_file
+from breweries.bellwoods import Bellwoods
 import datetime
 
-BOTTLESHOP = 'http://www.bellwoodsbrewery.com/product-category/bottleshop/'
+CACHE_TIME = 1200
 
-PICKLE_FILE = 'beers.pickle'
+@route('/')
+def index():
+	return static_file('index.html', root='src/')
 
-SOLD_OUT = 0
-RESTOCK = 1
-INSTOCK = 2
-NEW = 3
+@route('/<filename>')
+def static(filename):
+	return static_file(filename, root='src/')
 
-class Beer(object):
+@route('/css/<filename>')
+def css(filename):
+	return static_file(filename, 'src/css')
 
-	def __init__(self, title, link):
-		self.title = title
-		self.link = link
-		self.available = False
-		self.history = []
-		self.toggle_availability()
+@route('/js/<filename>')
+def js(filename):
+	return static_file(filename, 'src/js')
 
-	def toggle_availability(self):
-		t = datetime.datetime.now()
-		self.history.append(t)
-		self.available = not self.available
+@route('/images/<filename>')
+def img(filename):
+	return static_file(filename, 'src/images')
 
-def log(state, beer):
-	if state == SOLD_OUT:
-		print 'sold out: ' + beer.title
-	elif state == RESTOCK:
-		print 'restock: ' + beer.title
-	elif state == INSTOCK:
-		print 'still going: ' + beer.title
-	elif state == NEW:
-		print 'new: ' + beer.title
+bellwoods = Bellwoods('Bellwoods', 'http://www.bellwoodsbrewery.com/product-category/bottleshop/')
+breweries = [bellwoods]
+last_checked = None
+listings = {'beers': []}
 
-def process_current_availability(BEERS, available):
-	''' '''
+def update_listings():
+	beers = []
+	for b in breweries:
+		b.update_listings()
+		beers.append(b.get_current_as_json())
+	listings['beers'] = beers
+	return listings
+
+@route('/api/listings')
+def get_listings():
+	if last_checked == None:
+		global last_checked
+		last_checked = datetime.datetime.now()
+		print 'populating'
+		return update_listings()
 	
-	previously_available =  [b.title for b in BEERS.values() if b.available]
-	for beer in available:
-		title = beer['title']
-		link = beer['link']
-		if title not in BEERS:
-			new_beer = Beer(title, link)
-			log(NEW, new_beer)
-			BEERS[title] = new_beer
-		else:
-			# is it newly available
-			if title not in previously_available:
-				BEERS[title].toggle_availability()
-				log(RESTOCK, BEERS[title])
-			else:
-				log(INSTOCK, BEERS[title])
-	
-	currently_available = [b['title'] for b in available]
-	for title in previously_available:
-		if title not in currently_available:
-			BEERS[title].toggle_availability()
-			log(SOLD_OUT, BEERS[title])
-	save_beer_list(BEERS)
-
-def get_current_beers():
-    '''Pings the website and returns a list of [name, link] for each currently available beer'''
-
-    # request the page
-    res = requests.get(BOTTLESHOP)
-    # grab the ul that has the products
-    soup = bs4.BeautifulSoup(res.text, "html.parser")
-    # the ul.products has a li for each beer
-    beers = soup.findAll("ul", { "class" : "products" })[0].findAll('li')
-
-    parsed_beers = []
-
-    for beer in beers:
-    	title = beer.find('h3').getText()
-    	link = beer.find('a')['href']
-    	parsed_beers.append({'title': title, 'link': link})
-
-    return parsed_beers
-
-def get_beer_list():
-	'''Attempts to load a pickle file that corresponds to historical beer info.
-	Returns an empty dictionary if the file does not exist.'''
-
-	try:
-		p = open(PICKLE_FILE, 'r')
-		return pickle.load(p)
-	except IOError:
-		return {}
-
-def save_beer_list(BEERS):
-	''' '''
-	
-	p = open(PICKLE_FILE, 'wb')
-	pickle.dump(BEERS, p)
-	return
-
-def proc():
-	''' '''
-
-	# get the trackrecord
-	BEERS = get_beer_list()
-	# get the current beers
-	available = get_current_beers()
-	# update the track record
-	process_current_availability(BEERS, available)
-	return
+	now = datetime.datetime.now()
+	delta = now - last_checked
+	if delta.seconds > CACHE_TIME:
+		print 'outdated'
+		global last_checked
+		last_checked = datetime.datetime.now()
+		return update_listings()
+	else:
+		print 'still fresh'
+		return listings
 
 if __name__ == '__main__':
-    proc()
+	for b in breweries:
+		b.load_listings()
+	run(host='0.0.0.0', port=8080)
