@@ -1,3 +1,23 @@
 .header {
 	margin-top: 12rem;
 }
+
+.colophon {
+	border-top: 1px solid #eee;
+}
+
+.hop{
+	width:30px;
+	height:30px;
+}
+
+.center {
+	text-align:center;
+}
+
+.snifter {
+	position:relative;
+	top:9px;
+	width:30px;
+	height:30px;
+}

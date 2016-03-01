@@ -33,6 +33,7 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Inconsolata:400" rel="stylesheet" type="text/css">
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -45,10 +46,6 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src='js/bottleshopController.js'></script>
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- http://www.favicon.cc/?action=icon&file_id=780885 -->
-  <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQFDZAEFQ2QAvNM4AQVPZAHiF1AAAaDoAMj7IAFl45AClvfMAi6nuADc+0QA2QtQAtbbwAE5n3wBjgucAgZzsAFNt3wCctvEAR1baAKe58QAtKqAANEDPAFp75QBwmOoAKCTEAHB1ygB1m+oAj7LvAE5k4AC2xvQAt8b0ALvD9ACqqOwAZnS2AL/G9ABBfV4ASWLbAI6v8ACzvPIAYYHmAH2V6wCNjtYAT2beAGOE5gCUtfAAQFLZAEFrVgCitfAAVnfkACUgwwAYDKMAcpfpAHSX6QAZEaAAS1/cAKzC8wCvv/MAeJ7sAEGMaAAAXCMAT2nfAABdJgA/TtcAm7XxAJ648QBCU90Aa5HqADI5zwB+ktIAjK7vADdB1QCdn+YAS2PgAGCA5QB4neoAtsX0AFBu3QAFJBYAAF0wAGiH6ACFp+0AIiOzAFdz4wCMoe0AnJzeACYjxQCLrvAAKibFAJGx8ABNZd4ALCnFAFJm2ABtftcAPU7QAJ2x8AAtNsgAAGAxAEBR2QCEpO4AwMj1AG2Q6QAzPNEAJCHAAEZb3ABzmekAqsHzAABPLABOaNYAPErXAHyd7ABTa98AZonnAGSN6gCjrvEAQlTaAKW38QAzPNIAFwqhAK238QCut/EAdJnqAF5/5QCyuvEAaXjZAKCh5gApM7gAHRSkAE5l4AAqL8cAAFYwAH6g7QC4x/QALzfEAFdr4AC/x/QAMTjQADI70ABZeOMAJCS5ALCw7wCxsO8AOkbWAGKC5gA+SdYAuMDyAC0zwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/AAAAAAAAAAAAAAAAADYzf3YVAAAAAAAAAAAAUhlbVlhnMosAAAAAAAAAhYhmC3WJkkQDgQAAAAAAB21iAmIEAT+OkEdgAAAAXnM3ET1vWg4raGguDH4AAF4dCA8oSnqPijFTSUIWAAAlLGlLG3k1NGUxcBeAEwAATRhXHCZGLVk6cRhDUIYAAGxuQUASCWo4Y4NRChBcAAApKRQfOUyEHkVfdDBUBQAAAF1yIGQjhyd3e5F4fAAAAAAAIn2NDVUqIYxIGgAAAAAAa4JPPjxOBiRhBjsAAAAALy8GBgAATgAGBgYAAAAAAAAAAAAAAAAAAAAAAAAAAP9/AAD8HwAA8A8AAOAHAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAHAADABwAAho8AAP//AAA=" rel="icon" type="image/x-icon" />
 
 </head>
 <body>
@@ -58,26 +55,38 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
   <div class='container' ng-app='bottleshopApp' ng-controller='BottleshopController'>
     <div class="row">
       <div class='' style="margin-top: 10%">
-        <h2>TO Bottleshops</h2>
-          <p>This is an (incomplete) overview of bottleshop listings for Toronto Breweries that have online pages. Results are at most 20 minutes old.</p>
-        <div ng-show='cookingUp'>
+        <h2 class='center'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'> TO Bottleshops <img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'></h2>
+          <p>This is an overview of bottleshop listings for Toronto Breweries that have online pages. Results are at most 20 minutes old.</p>
+        <div ng-show='refreshing'>
           <p>Fetching the list - coming in hot off the presses ...</p>
         </div>
-        <div ng-hide='cookingUp'>
+        <div ng-hide='refreshing'>
           <h4>Recently Stocked</h4>
             <div ng-repeat='brewery in listings'>
               <span ng-repeat='beer in brewery.beers'>
-                <p ng-show='beer.recently_added'>{{brewery.brewery}} // {{beer.name}}</p>
+                <p ng-show='beer.recently_added'><span class='brewery-title'>{{brewery.brewery}}</span> // {{beer.name}}</p>
               </span>
             </div>
           <h4>All listings</h4>
             <div ng-repeat='brewery in listings'>
               <span ng-repeat='beer in brewery.beers'>
-                <p>{{brewery.brewery}} // {{beer.name}} <span ng-show='beer.recently_added'>(Recent)</span></p>
+                <p>{{brewery.brewery}} // {{beer.name}} <span class='recent-addition' ng-show='beer.recently_added'>(Recent)</span></p>
               </span>
             </div>
         </div>
       </div>
+    </div>
+    <br>
+    <div class='row colophon'>
+      <h5>Notes, Thanks, Colophon</h5>
+        <p>Special thanks to all of the breweries listed. This was made to ease Zach's (the author) Friday beer runs.</p>
+        <p>A recent tag indicates that the beer has been (re)stocked in the past 24 hours.</p>
+      <h5>Colophon</h5>
+        <p> The Inconsolate typeface was designed by Ralph Levien and is available <a href='https://www.google.com/fonts/specimen/Inconsolata'>here</a>.</p>
+        <p>Icons on this page all are from <a href='https://thenounproject.com'>The Noun Project</a> via a CC Attribution 3.0 license. <a href='https://thenounproject.com/heyoka/icon/74414/'>Hops</a> by Mark Caron, <a href='https://thenounproject.com/tedcasper/icon/219399/'>Fermentation Tank</a> by Ted Casper, and <a href='https://thenounproject.com/ilkebrs/collection/beer-glasses/?oq=beer&cidx=4&i=218316'>Beer Snifter Glass</a> by I Like Bears.</p>
+    </div>
+    <div class='row footer'>
+      <p class='center'>Made with <img class='snifter' src='images/snifter.png'> in Toronto, ON.</p>
     </div>
   </div>
 
