@@ -34,3 +34,16 @@
 .hide-brewery {
 	color:white;
 }
+
+
+
+/* Larger than phone */
+@media (min-width: 550px) {
+}
+
+/* Larger than tablet */
+@media (min-width: 960px) {
+	.break {
+		display:none;
+	}
+}
