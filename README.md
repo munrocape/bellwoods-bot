@@ -5,7 +5,7 @@ This is a scraper and website to list up-to-date bottleshop listings for breweri
 Currently, it supports:
 
 - [x] Bellwoods
-- [ ] Burdock
+- [x] Burdock
 - [ ] Rainhard
 - [ ] Bloodbrothers
 - [ ] Leftfield
