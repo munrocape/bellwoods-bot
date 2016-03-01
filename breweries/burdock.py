@@ -9,7 +9,7 @@ class Burdock(Brewery):
 			content = beer.findAll("div", {'class': 'shop_beer_content'})
 			if content:
 				content = content[0]
-				title = content.find('h4').getText()
+				title = content.find('h4').getText().split('(')[0]
 				link = self.bottleshop_url
 				parsed_beers.append({'title': title, 'link': link})
 

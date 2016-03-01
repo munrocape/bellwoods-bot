@@ -64,7 +64,7 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
           <h4>Recently Stocked</h4>
             <div ng-repeat='brewery in listings'>
               <span ng-repeat='beer in brewery.beers track by $index'>
-                <p ng-show='beer.recently_added'><span ng-class='$index == 0 ? "show-brewery" : "hide-brewery"' class='brewery-title'>{{brewery.brewery}}</span> // <a href='{{beer.link}}' class='beer-link'>{{beer.name}}</a></p>
+                <p ng-show='beer.recently_added'><span ng-class='$index == 0 ? "show-brewery" : "hide-brewery"' class='brewery-title'>{{brewery.brewery}} // </span>  <a href='{{beer.link}}' class='beer-link'>{{beer.name}}</a></p>
               </span>
             </div>
           <h4>All listings</h4>
@@ -78,8 +78,8 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
     </div>
     <br>
     <div class='row colophon'>
-      <h5>Notes, Thanks, Colophon</h5>
-        <p>Special thanks to all of the breweries listed. This was made to ease Zach's (the <a href='mailto:zach.munrocape@gmail.com'>author</a>) Friday beer runs.</p>
+      <h5>Thanks & Notes</h5>
+        <p>Special thanks to all of the breweries listed. This was made to ease Zach's (the <a href='mailto:zach.munrocape+bottleshop@gmail.com'>author</a>) Friday beer runs.</p>
         <p>A recent tag indicates that the beer has been (re)stocked in the past 24 hours.</p>
       <h5>Colophon</h5>
         <p> The Inconsolate typeface was designed by Ralph Levien and is available <a href='https://www.google.com/fonts/specimen/Inconsolata'>here</a>.</p>
