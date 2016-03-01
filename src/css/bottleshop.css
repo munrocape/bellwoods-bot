@@ -18,6 +18,11 @@
 .snifter {
 	position:relative;
 	top:9px;
+	left:1px;
 	width:30px;
 	height:30px;
+}
+
+.beer-link {
+	color: #222;
 }

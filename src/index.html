@@ -64,13 +64,13 @@ ascii art from: http://www.chris.com/ascii/index.php?art=food%20and%20drink/beer
           <h4>Recently Stocked</h4>
             <div ng-repeat='brewery in listings'>
               <span ng-repeat='beer in brewery.beers'>
-                <p ng-show='beer.recently_added'><span class='brewery-title'>{{brewery.brewery}}</span> // {{beer.name}}</p>
+                <p ng-show='beer.recently_added'><span class='brewery-title'>{{brewery.brewery}}</span> // <a href='{{beer.link}}' class='beer-link'>{{beer.name}}</a></p>
               </span>
             </div>
           <h4>All listings</h4>
             <div ng-repeat='brewery in listings'>
               <span ng-repeat='beer in brewery.beers'>
-                <p>{{brewery.brewery}} // {{beer.name}} <span class='recent-addition' ng-show='beer.recently_added'>(Recent)</span></p>
+                <p>{{brewery.brewery}} // <a href='{{beer.link}}' class='beer-link'>{{beer.name}}</a> <span class='recent-addition' ng-show='beer.recently_added'>(Recent)</span></p>
               </span>
             </div>
         </div>
