@@ -21,8 +21,11 @@ class Brewery(object):
 		return bs4.BeautifulSoup(res.text, "html.parser")
 
 	def load_listings(self):
-		with open(self.fname, 'r') as f:
-			self.all_listings = pickle.load(f)
+		try:
+			with open(self.fname, 'r') as f:
+				self.all_listings = pickle.load(f)
+		except IOError:
+			self.all_listings = {}
 
 	def save_listings(self):
 		f = open(self.fname, 'w+')
