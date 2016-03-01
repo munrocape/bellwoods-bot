@@ -2,8 +2,9 @@ var bottleshopApp = angular.module('bottleshopApp', []);
 
 bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile', function ($scope, $http, $compile) {
 	$scope.listings = [];
-	$scope.flattenedBeers = [];
+	$scope.recent = [];
 	$scope.refreshing = true;
+    $scope.headerMessage = 'Fetching the list - coming in hot off the presses ...';
     $scope.init = function () {
     	// Simple GET request example:
     	$http.get('/api/listings').then(
@@ -12,7 +13,7 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
     			$scope.refreshing = false;
     		}, 
     		function error(rep) {
-    			$scope.displayError("Beer listings are unavailable :(");
+                $scope.headerMessage = 'Beer listings are unavailable :(';
     		}
     	);
     }
