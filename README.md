@@ -6,7 +6,7 @@ Currently, it supports:
 
 - [x] Bellwoods
 - [x] Burdock
-- [ ] Rainhard
+- [x] Rainhard
 - [ ] Bloodbrothers
 - [ ] Leftfield
 
