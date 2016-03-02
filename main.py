@@ -1,6 +1,7 @@
 from bottle import route, run, static_file
 from breweries.bellwoods import Bellwoods
 from breweries.burdock import Burdock
+from breweries.rainhard import Rainhard
 import datetime
 
 CACHE_TIME = 1200
@@ -27,7 +28,8 @@ def img(filename):
 
 bellwoods = Bellwoods('Bellwoods', 'http://www.bellwoodsbrewery.com/product-category/bottleshop/')
 burdock = Burdock('Burdock', 'http://burdockto.com/bottleshop/')
-breweries = [bellwoods, burdock]
+rainhard = Rainhard('Rainhard', 'http://rainhardbrewing.com/the-bottle-shop/')
+breweries = [bellwoods, burdock, rainhard]
 
 last_checked = None
 listings = {'beers': []}
