@@ -6,20 +6,27 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
 	$scope.refreshing = true;
     $scope.headerMessage = 'Fetching the list - coming in hot off the presses ...';
     $scope.init = function () {
-    	// Simple GET request example:
     	$http.get('/api/listings').then(
     		function success(rep) {
     			$scope.listings = rep.data['beers'];
+                var i;
+                for(i = 0; i < $scope.listings.length; i++){
+                    recent = $scope.listings[i].beers.filter($scope.recentBeerFilter);
+                    if (recent.length) {
+                        $scope.recent.push({'brewery': $scope.listings[i].brewery, 'beers': recent});
+                    }
+                }
     			$scope.refreshing = false;
+                console.log($scope.recent);
     		}, 
     		function error(rep) {
                 $scope.headerMessage = 'Beer listings are unavailable :(';
     		}
     	);
-    }
+    };
 
-    $scope.displayError = function(msg) {
-    	$scope.error = msg;
+    $scope.recentBeerFilter = function (beer) {
+        return beer.recently_added;
     }
 
     $scope.init();
