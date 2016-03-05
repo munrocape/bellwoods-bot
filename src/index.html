@@ -24,8 +24,8 @@ ascii art (slightly) modified from: http://www.chris.com/ascii/index.php?art=foo
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>Bottleshops</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Bottleshop listings for Toronto craft beer">
+  <meta name="author" content="Zach Munro-Cape">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -41,6 +41,7 @@ ascii art (slightly) modified from: http://www.chris.com/ascii/index.php?art=foo
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel='stylesheet' href='css/bottleshop.css'>
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -51,17 +52,20 @@ ascii art (slightly) modified from: http://www.chris.com/ascii/index.php?art=foo
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/hop.png" />
 </head>
-<body>
-
+<body ng-app='bottleshopApp'>
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class='container' ng-app='bottleshopApp' ng-controller='BottleshopController'>
+  <div class='container' ng-controller='BottleshopController'>
     <div class="row">
       <div class='' style="margin-top: 10%">
         <h2 class='center'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'><br class='break'>TO Bottleshops<br class='break'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'><img class='hop' src='images/hop.png'></h2>
           <p class='center'>This is an overview of bottleshop listings for Toronto breweries that have online pages.</p>
         <div ng-show='refreshing'>
-          <p>{{headerMessage}}</p>
+          <p>{{headerMessage}} 
+            <span ng-repeat='i in beerRange'>
+              <i class="em em-beer"></i>
+            </span>
+          </p>
         </div>
         <div ng-hide='refreshing'>
           <h4 ng-show='recent.length > 0'>Recently Stocked</h4>
@@ -81,20 +85,27 @@ ascii art (slightly) modified from: http://www.chris.com/ascii/index.php?art=foo
     </div>
     <br>
     <div class='row colophon'>
+      <div class='note'>
         <u>Thanks</u>
         <p>Special thanks to the above breweries for making online listings - which help resolve a typical Friday afternoon conundrum.</p>
+      </div>
+      <div class='note'>
         <u>Notes</u>
         <p>All trademarked product or company names are the property of their respective holders. Use of them does not imply any association or endorsement by them.</p>
+      </div>
+      <div class='note'>
         <u>Colophon</u>
-        <p> The Inconsolate typeface was designed by Ralph Levien and is available <a href='https://www.google.com/fonts/specimen/Inconsolata'>here</a>.<br>Icons on this page are from <a href='https://thenounproject.com'>The Noun Project</a>. <a href='https://thenounproject.com/heyoka/icon/74414/'>Hops</a> by Mark Caron and <a href='https://thenounproject.com/ilkebrs/collection/beer-glasses/?oq=beer&cidx=4&i=218316'>Beer Snifter Glass</a> by I Like Bears.</p>
-        <u>Contact</u>
-        <p> Have I missed one? You can send me an email <a href='mailto:zachmunrocape+bottleshop_project@gmail.com?subject=Bottleshop%20Project%20Listings'>here</a>.</p>
+        <p> The Inconsolate typeface was designed by Ralph Levien and is available 
+        <a href='https://www.google.com/fonts/specimen/Inconsolata'>here</a>.
+        <br>Icons on this page are from <a href='https://thenounproject.com'>The Noun Project</a>. 
+        <a href='https://thenounproject.com/heyoka/icon/74414/'>Hops</a> by Mark Caron and 
+        <a href='https://thenounproject.com/ilkebrs/collection/beer-glasses/?oq=beer&cidx=4&i=218316'>Beer Snifter Glass</a> by I Like Bears.</p>
+      </div>
     </div>
     <div class='row footer'>
       <p class='center'>Made with <img class='snifter' src='images/snifter.png'> in Toronto, ON.</p>
     </div>
   </div>
-
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>

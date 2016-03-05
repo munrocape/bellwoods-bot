@@ -1,3 +1,4 @@
 #!/bin/bash 
-pid=`ps | grep "python" | cut -d " " -f 2`
+pid=`ps -ef | grep "python main.py" -m 1 | awk '{print $2}'`
+echo going to kill $pid
 kill -9 $pid
