@@ -4,8 +4,9 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
 	$scope.listings = [];
 	$scope.recent = [];
 	$scope.refreshing = true;
+    $scope.dotRange = [1, 2, 3];
     $scope.beerRange = [];
-    $scope.headerMessage = 'Fetching the list - coming in hot off the presses . . .';
+    $scope.headerMessage = 'Fetching the list - coming in hot off the presses';
     $scope.init = function () {
         beerInterval = setInterval($scope.addEmoji, 550);
         $http.get('/api/listings').then(
@@ -31,6 +32,7 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
 
     $scope.addEmoji = function () {
         $scope.beerRange.push($scope.beerRange.length);
+        $scope.dotRange.pop();
         // need to use $apply to get angular to update DOM
         $scope.$apply();
     }
