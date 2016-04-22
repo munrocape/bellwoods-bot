@@ -6,11 +6,12 @@ class Burdock(Brewery):
 		beers = soup.findAll("ul", { "class" : "shop_beer_list" })[0].findAll('li')
 		parsed_beers = []
 		for beer in beers:
-			content = beer.findAll("div", {'class': 'shop_beer_content'})
+			content = beer.findAll("div", {'class': 'beer_overlay'})
 			if content:
 				content = content[0]
 				title = content.find('h4').getText().split('(')[0]
+				in_stock = content.find('p').getText()
 				link = self.bottleshop_url
-				parsed_beers.append({'title': title, 'link': link})
+				parsed_beers.append({'title': title, 'link': link, 'stock': in_stock})
 
 		return parsed_beers
