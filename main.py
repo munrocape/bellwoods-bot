@@ -40,28 +40,22 @@ def update_listings():
 		b.update_listings()
 		beers.append(b.get_current_as_json())
 	listings['beers'] = beers
-	return listings
 
 @route('/api/listings')
 def get_listings():
-	if last_checked == None:
-		global last_checked
-		last_checked = datetime.datetime.now()
-		print 'populating'
-		return update_listings()
-	
 	now = datetime.datetime.now()
 	delta = now - last_checked
 	if delta.seconds > CACHE_TIME:
 		print 'outdated'
 		global last_checked
 		last_checked = datetime.datetime.now()
-		return update_listings()
-	else:
-		print 'still fresh'
-		return listings
+		update_listings()
+	return listings
 
 if __name__ == '__main__':
+	update_listings()
+	global last_checked
+	last_checked = datetime.datetime.now()
 	for b in breweries:
 		b.load_listings()
 	run(host='0.0.0.0', port=8080)
