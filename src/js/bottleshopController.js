@@ -25,6 +25,7 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
             function error(rep) {
                 $scope.headerMessage = 'Beer listings are unavailable :(';
                 $scope.beerRange = [];
+                clearInterval(beerInterval);
                 $scope.$apply();
             }
         );
@@ -33,7 +34,6 @@ bottleshopApp.controller('BottleshopController', ['$scope', '$http', '$compile',
     $scope.addEmoji = function () {
         $scope.beerRange.push($scope.beerRange.length);
         $scope.dotRange.pop();
-        // need to use $apply to get angular to update DOM
         $scope.$apply();
     }
 
