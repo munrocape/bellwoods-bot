@@ -30,7 +30,7 @@ def img(filename):
 bellwoods = Bellwoods('Bellwoods', 'http://www.bellwoodsbrewery.com/product-category/bottleshop/')
 burdock = Burdock('Burdock', 'http://burdockto.com/bottleshop/')
 rainhard = Rainhard('Rainhard', 'http://rainhardbrewing.com/the-bottle-shop/')
-folly = Folly('Folly', 'http://www.follybrewpub.com/')
+folly = Folly('Folly', 'http://www.follybrewing.com/')
 breweries = [bellwoods, burdock, rainhard, folly]
 
 last_checked = None
