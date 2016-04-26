@@ -20,19 +20,19 @@ class Brewery(object):
 		res = requests.get(self.bottleshop_url)
 		return bs4.BeautifulSoup(res.text, "html.parser")
 
-	def load_listings(self):
-		try:
-			with open(self.fname, 'r') as f:
-				self.all_listings = pickle.load(f)
-		except IOError:
-			self.all_listings = {}
-
 	def save_listings(self):
 		f = open(self.fname, 'w+')
 		pickle.dump(self.all_listings, f)
 
 	def update_listings(self):
-		available = self.parse_soup()
+		try:
+			available = self.parse_soup()
+		except Exception as e:
+			print
+			print 'ERROR PARSING : ' + self.name
+			print 'ERROR MESSAGE : ' + str(e)
+			print
+			return
 		self.currently_available = {}
 		previously_available = [b.title for b in self.all_listings.values() if b.is_available()]
 		for beer in available:

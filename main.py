@@ -58,6 +58,4 @@ if __name__ == '__main__':
 	update_listings()
 	global last_checked
 	last_checked = datetime.datetime.now()
-	for b in breweries:
-		b.load_listings()
 	run(host='0.0.0.0', port=8080)
